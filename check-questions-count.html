@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Check Questions Count</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .warning {
+            background-color: #fff3cd !important;
+            color: #856404;
+            font-weight: bold;
+        }
+        .error {
+            background-color: #f8d7da !important;
+            color: #721c24;
+            font-weight: bold;
+        }
+        .success {
+            background-color: #d4edda !important;
+            color: #155724;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Kiểm Tra Số Câu Hỏi Mỗi Chủ Đề</h1>
+    <div id="output"></div>
+
+    <script src="js/questions.js"></script>
+    <script>
+        const output = document.getElementById('output');
+        let html = '<table>';
+        html += '<thead><tr><th>#</th><th>Topic</th><th>Số Câu</th><th>Trạng Thái</th></tr></thead>';
+        html += '<tbody>';
+
+        let totalQuestions = 0;
+        let index = 1;
+        const topicNames = {
+            'installation': 'Cài đặt & Triển khai',
+            'active-directory': 'Active Directory',
+            'ad-objects': 'AD Objects',
+            'powershell': 'PowerShell',
+            'networking': 'Dịch vụ mạng (DHCP, DNS)',
+            'storage': 'Quản lý ổ đĩa',
+            'file-sharing': 'File Sharing & Permissions',
+            'group-policy': 'Group Policy',
+            'wds': 'Windows Deployment Services',
+            'iis': 'IIS Web Server',
+            'certificates': 'Certificates & SSL/TLS',
+            'advanced-ad': 'Advanced AD Features',
+            'vpn': 'VPN Services',
+            'nps': 'Network Policy Server (NPS)',
+            'nap': 'Network Access Protection (NAP)',
+            'dfs': 'Distributed File System (DFS)',
+            'fsrm': 'File Server Resource Manager',
+            'auditing': 'Auditing & Security',
+            'folder-redirection': 'Folder Redirection'
+        };
+
+        for (let topic in questionBank) {
+            if (topic === 'all') continue;
+            
+            const questions = questionBank[topic];
+            const count = questions ? questions.length : 0;
+            totalQuestions += count;
+            
+            let statusClass = '';
+            let status = '';
+            
+            if (count === 0) {
+                statusClass = 'error';
+                status = '❌ KHÔNG CÓ CÂU HỎI';
+            } else if (count < 10) {
+                statusClass = 'warning';
+                status = `⚠️ THIẾU (cần thêm ${10 - count} câu)`;
+            } else if (count === 10) {
+                statusClass = 'success';
+                status = '✅ ĐỦ';
+            } else {
+                statusClass = 'success';
+                status = `✅ DƯ (${count - 10} câu)`;
+            }
+            
+            html += `<tr class="${statusClass}">`;
+            html += `<td>${index++}</td>`;
+            html += `<td><strong>${topic}</strong><br><small>${topicNames[topic] || topic}</small></td>`;
+            html += `<td style="text-align: center; font-size: 20px;">${count}</td>`;
+            html += `<td>${status}</td>`;
+            html += '</tr>';
+        }
+        
+        html += '</tbody></table>';
+        
+        html += `<div class="total">`;
+        html += `📊 <strong>Tổng cộng:</strong> ${totalQuestions} câu hỏi<br>`;
+        html += `📝 <strong>Số topics:</strong> ${index - 1} topics<br>`;
+        html += `🎯 <strong>Trung bình:</strong> ${(totalQuestions / (index - 1)).toFixed(1)} câu/topic<br>`;
+        html += `💯 <strong>Cần có:</strong> ${(index - 1) * 10} câu (10 câu/topic)`;
+        html += `</div>`;
+        
+        // Summary
+        const topicsLessThan10 = Object.keys(questionBank).filter(t => 
+            t !== 'all' && questionBank[t] && questionBank[t].length < 10
+        );
+        
+        if (topicsLessThan10.length > 0) {
+            html += `<div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">`;
+            html += `<strong>⚠️ Cảnh báo:</strong> Có <strong>${topicsLessThan10.length} topics</strong> có ít hơn 10 câu hỏi:<br><br>`;
+            topicsLessThan10.forEach(topic => {
+                const count = questionBank[topic].length;
+                html += `• <strong>${topic}</strong>: ${count} câu (thiếu ${10 - count} câu)<br>`;
+            });
+            html += `</div>`;
+        } else {
+            html += `<div style="margin-top: 20px; padding: 15px; background: #d4edda; border-left: 4px solid #28a745; border-radius: 4px;">`;
+            html += `<strong>✅ Hoàn hảo!</strong> Tất cả các topics đều có đủ 10 câu hỏi trở lên!`;
+            html += `</div>`;
+        }
+        
+        output.innerHTML = html;
+    </script>
+</body>
+</html>
