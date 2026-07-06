@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Questions</title>
+</head>
+<body>
+    <h1>Test Câu Hỏi</h1>
+    <div id="output"></div>
+    
+    <script src="js/questions.js"></script>
+    <script>
+        // Test questions
+        const output = document.getElementById('output');
+        
+        try {
+            // Test 1: Check questionBank exists
+            output.innerHTML += '<h2>✓ questionBank loaded</h2>';
+            
+            // Test 2: Check all topics
+            const topics = Object.keys(questionBank);
+            output.innerHTML += `<h3>Số chủ đề: ${topics.length - 1}</h3>`; // -1 vì có 'all'
+            output.innerHTML += '<ul>';
+            topics.forEach(topic => {
+                if (topic !== 'all') {
+                    const count = questionBank[topic].length;
+                    output.innerHTML += `<li><strong>${topic}</strong>: ${count} câu hỏi</li>`;
+                }
+            });
+            output.innerHTML += '</ul>';
+            
+            // Test 3: Check total questions
+            output.innerHTML += `<h3>Tổng số câu hỏi (all): ${questionBank.all.length}</h3>`;
+            
+            // Test 4: Test getQuestionsByTopic function
+            const testQuestions = getQuestionsByTopic('installation', 5);
+            output.innerHTML += `<h3>✓ getQuestionsByTopic hoạt động: lấy được ${testQuestions.length} câu</h3>`;
+            
+            // Test 5: Check question structure
+            const sampleQ = questionBank.installation[0];
+            output.innerHTML += '<h3>Cấu trúc câu hỏi mẫu:</h3>';
+            output.innerHTML += '<pre>' + JSON.stringify(sampleQ, null, 2) + '</pre>';
+            
+            output.innerHTML += '<h2 style="color: green;">✅ TẤT CẢ TEST THÀNH CÔNG!</h2>';
+            
+        } catch (error) {
+            output.innerHTML += `<h2 style="color: red;">❌ LỖI: ${error.message}</h2>`;
+            console.error(error);
+        }
+    </script>
+</body>
+</html>

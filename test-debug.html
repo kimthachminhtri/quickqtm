@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Test</title>
+</head>
+<body>
+    <h1>Debug Test</h1>
+    <button onclick="testQuestions()">Test Questions</button>
+    <button onclick="testStartPractice()">Test Start Practice</button>
+    <div id="output"></div>
+
+    <script src="js/questions.js"></script>
+    <script>
+        function testQuestions() {
+            const output = document.getElementById('output');
+            let html = '<h2>QuestionBank Status:</h2>';
+            
+            // Check if questionBank exists
+            if (typeof questionBank === 'undefined') {
+                html += '<p style="color: red;">ERROR: questionBank is undefined!</p>';
+            } else {
+                html += '<p style="color: green;">✓ questionBank exists</p>';
+                
+                // List all topics
+                html += '<h3>Available Topics:</h3><ul>';
+                for (let topic in questionBank) {
+                    const count = questionBank[topic] ? questionBank[topic].length : 0;
+                    html += `<li><strong>${topic}</strong>: ${count} questions</li>`;
+                }
+                html += '</ul>';
+            }
+            
+            // Check if getQuestionsByTopic exists
+            if (typeof getQuestionsByTopic === 'undefined') {
+                html += '<p style="color: red;">ERROR: getQuestionsByTopic is undefined!</p>';
+            } else {
+                html += '<p style="color: green;">✓ getQuestionsByTopic function exists</p>';
+                
+                // Test getting questions
+                try {
+                    const testQuestions = getQuestionsByTopic('installation', 5);
+                    html += `<p>Test: Got ${testQuestions.length} installation questions</p>`;
+                    html += `<pre>${JSON.stringify(testQuestions[0], null, 2)}</pre>`;
+                } catch (e) {
+                    html += `<p style="color: red;">ERROR calling getQuestionsByTopic: ${e.message}</p>`;
+                }
+            }
+            
+            output.innerHTML = html;
+        }
+        
+        function testStartPractice() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<h2>Testing startPractice...</h2>';
+            
+            try {
+                // Test if we can get questions
+                const questions = getQuestionsByTopic('active-directory', 10);
+                output.innerHTML += `<p style="color: green;">✓ Got ${questions.length} questions for active-directory</p>`;
+                output.innerHTML += `<p>First question: ${questions[0].question}</p>`;
+            } catch (e) {
+                output.innerHTML += `<p style="color: red;">ERROR: ${e.message}</p>`;
+                output.innerHTML += `<pre>${e.stack}</pre>`;
+            }
+        }
+        
+        // Auto-run test on load
+        window.addEventListener('load', function() {
+            console.log('Debug page loaded');
+            testQuestions();
+        });
+    </script>
+</body>
+</html>

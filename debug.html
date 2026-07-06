@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Buttons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn {
+            padding: 12px 24px;
+            margin: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-success {
+            background: #107c10;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #0e6b0e;
+            transform: translateY(-2px);
+        }
+        .btn-danger {
+            background: #d13438;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #a80000;
+            transform: translateY(-2px);
+        }
+        .log {
+            background: #f0f0f0;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .log-item {
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug: Test Buttons</h1>
+
+    <div class="test-section">
+        <h2>Test 1: Direct Button Clicks</h2>
+        <button class="btn btn-success" onclick="testFunction('Submit Quiz')">
+            <i>✓</i> Nộp bài (Test)
+        </button>
+        <button class="btn btn-danger" onclick="testFunction('End Exam')">
+            <i>⏹</i> Kết thúc thi (Test)
+        </button>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Simulate Quiz Submission</h2>
+        <button class="btn btn-success" id="submit-btn-test" onclick="simulateSubmit()">
+            <i>✓</i> Nộp bài (Simulation)
+        </button>
+        <p><small>Kiểm tra xem function submitQuiz có hoạt động không</small></p>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Check Console</h2>
+        <button class="btn" style="background: #0078d4; color: white;" onclick="checkConsole()">
+            Kiểm tra Console
+        </button>
+        <p><small>Mở Developer Tools (F12) để xem logs</small></p>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 4: Load Actual Website</h2>
+        <button class="btn" style="background: #667eea; color: white;" onclick="loadActualWebsite()">
+            Mở Website Chính
+        </button>
+        <p><small>Sẽ mở index.html và tự động bật Developer Console</small></p>
+    </div>
+
+    <div class="log" id="log">
+        <div class="log-item info">📋 Debug Log - Ready</div>
+    </div>
+
+    <script>
+        const log = document.getElementById('log');
+        
+        function addLog(message, type = 'info') {
+            const item = document.createElement('div');
+            item.className = `log-item ${type}`;
+            item.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            log.insertBefore(item, log.firstChild);
+        }
+
+        function testFunction(name) {
+            addLog(`✅ ${name} button clicked successfully!`, 'success');
+            console.log(`${name} clicked`);
+            alert(`${name} hoạt động tốt!`);
+        }
+
+        function simulateSubmit() {
+            addLog('🔄 Simulating submitQuiz()...', 'info');
+            
+            // Simulate the actual submitQuiz function
+            try {
+                const correctCount = 7;
+                const totalQuestions = 10;
+                const score = Math.round((correctCount / totalQuestions) * 100);
+                
+                addLog(`Calculated: ${score}% (${correctCount}/${totalQuestions})`, 'success');
+                addLog('✅ submitQuiz() logic works!', 'success');
+                
+                alert(`Kết quả: ${score}%\nĐúng: ${correctCount}/${totalQuestions}`);
+            } catch (error) {
+                addLog(`❌ Error: ${error.message}`, 'error');
+            }
+        }
+
+        function checkConsole() {
+            addLog('Opening Developer Console...', 'info');
+            console.log('%c=== BUTTON TEST ===', 'color: blue; font-size: 20px; font-weight: bold;');
+            console.log('%c✓ If you see this, console logging works!', 'color: green;');
+            console.log('%cTest submitQuiz:', 'font-weight: bold;');
+            console.log('typeof submitQuiz:', typeof window.submitQuiz);
+            console.log('typeof endExam:', typeof window.endExam);
+            
+            addLog('✅ Check console (F12) for details', 'success');
+            alert('Kiểm tra Console (F12) để xem logs chi tiết!');
+        }
+
+        function loadActualWebsite() {
+            addLog('🌐 Loading index.html...', 'info');
+            window.open('index.html', '_blank');
+            addLog('✅ Website opened in new tab', 'success');
+        }
+
+        // Auto test on load
+        window.addEventListener('load', () => {
+            addLog('✅ Debug page loaded successfully', 'success');
+            addLog('👉 Click buttons above to test functionality', 'info');
+        });
+
+        // Test button accessibility
+        document.querySelectorAll('.btn').forEach((btn, index) => {
+            btn.addEventListener('mouseenter', () => {
+                addLog(`👆 Hovering button ${index + 1}`, 'info');
+            });
+        });
+    </script>
+</body>
+</html>

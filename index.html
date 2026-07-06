@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Thi Windows Server 2012 - Hệ Thống Trắc Nghiệm</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-server"></i>
+                <h1>Windows Server 2012</h1>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" data-page="home">
+                    <i class="fas fa-home"></i> Trang chủ
+                </a>
+                <a href="#" class="nav-link" data-page="practice">
+                    <i class="fas fa-dumbbell"></i> Luyện tập
+                </a>
+                <a href="#" class="nav-link" data-page="exam">
+                    <i class="fas fa-clipboard-check"></i> Thi thử
+                </a>
+                <a href="#" class="nav-link" data-page="statistics">
+                    <i class="fas fa-chart-bar"></i> Thống kê
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <div class="container">
+                <div class="hero">
+                    <h2>Chào mừng đến với Hệ Thống Ôn Thi</h2>
+                    <p>Windows Server 2012 - Quản Trị Hệ Thống Mạng</p>
+                </div>
+
+                <div class="topics-grid">
+                    <div class="topic-card" data-topic="all">
+                        <div class="topic-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>Tất cả chủ đề</h3>
+                        <p>Ôn tập toàn bộ kiến thức</p>
+                        <button class="btn btn-primary" onclick="startPractice('all')">
+                            Bắt đầu luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="installation">
+                        <div class="topic-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h3>Cài đặt & Triển khai</h3>
+                        <p>Installation & Deployment</p>
+                        <button class="btn btn-primary" onclick="startPractice('installation')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="active-directory">
+                        <div class="topic-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h3>Active Directory</h3>
+                        <p>Domain Controller, OU, Users</p>
+                        <button class="btn btn-primary" onclick="startPractice('active-directory')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="networking">
+                        <div class="topic-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Dịch vụ mạng</h3>
+                        <p>DHCP, DNS, IPv6</p>
+                        <button class="btn btn-primary" onclick="startPractice('networking')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="storage">
+                        <div class="topic-icon">
+                            <i class="fas fa-hdd"></i>
+                        </div>
+                        <h3>Quản lý ổ đĩa</h3>
+                        <p>Storage, RAID, File Sharing</p>
+                        <button class="btn btn-primary" onclick="startPractice('storage')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="group-policy">
+                        <div class="topic-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Group Policy</h3>
+                        <p>GPO, Security Policies</p>
+                        <button class="btn btn-primary" onclick="startPractice('group-policy')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="wds">
+                        <div class="topic-icon">
+                            <i class="fas fa-compact-disc"></i>
+                        </div>
+                        <h3>WDS</h3>
+                        <p>Windows Deployment Services</p>
+                        <button class="btn btn-primary" onclick="startPractice('wds')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="iis">
+                        <div class="topic-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>IIS Web Server</h3>
+                        <p>Internet Information Services</p>
+                        <button class="btn btn-primary" onclick="startPractice('iis')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="certificates">
+                        <div class="topic-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Certificates</h3>
+                        <p>CA, SSL/TLS, PKI</p>
+                        <button class="btn btn-primary" onclick="startPractice('certificates')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="vpn">
+                        <div class="topic-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>VPN Services</h3>
+                        <p>PPTP, L2TP, SSTP</p>
+                        <button class="btn btn-primary" onclick="startPractice('vpn')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="nps">
+                        <div class="topic-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>NPS & RADIUS</h3>
+                        <p>Network Policy Server</p>
+                        <button class="btn btn-primary" onclick="startPractice('nps')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="dfs">
+                        <div class="topic-icon">
+                            <i class="fas fa-folder-tree"></i>
+                        </div>
+                        <h3>DFS</h3>
+                        <p>Distributed File System</p>
+                        <button class="btn btn-primary" onclick="startPractice('dfs')">
+                            Luyện tập
+                        </button>
+                    </div>
+
+                    <div class="topic-card" data-topic="fsrm">
+                        <div class="topic-icon">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <h3>FSRM</h3>
+                        <p>File Server Resource Manager</p>
+                        <button class="btn btn-primary" onclick="startPractice('fsrm')">
+                            Luyện tập
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div id="practice-page" class="page">
+            <div class="container">
+                <div class="quiz-container" id="quiz-container">
+                    <div class="quiz-header">
+                        <h2 id="quiz-title">Luyện tập trắc nghiệm</h2>
+                        <div class="quiz-info">
+                            <span class="question-counter">
+                                Câu <span id="current-question">1</span>/<span id="total-questions">10</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-body">
+                        <div class="question-text" id="question-text"></div>
+                        <div class="answers" id="answers"></div>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()">
+                            <i class="fas fa-arrow-left"></i> Câu trước
+                        </button>
+                        <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">
+                            Câu sau <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-success" id="submit-btn" onclick="submitQuiz()" style="display: none;">
+                            <i class="fas fa-check"></i> Nộp bài
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Practice Result Modal -->
+                <div id="practice-result-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="result-header">
+                            <i class="fas fa-trophy"></i>
+                            <h2>Kết quả luyện tập</h2>
+                        </div>
+                        <div class="result-body">
+                            <div class="score-circle">
+                                <div class="score-text">
+                                    <span id="practice-score-percentage">0</span>%
+                                </div>
+                            </div>
+                            <div class="result-details">
+                                <p><strong>Số câu đúng:</strong> <span id="practice-correct-count">0</span></p>
+                                <p><strong>Số câu sai:</strong> <span id="practice-wrong-count">0</span></p>
+                                <p><strong>Tổng số câu:</strong> <span id="practice-total-count">0</span></p>
+                            </div>
+                        </div>
+                        <div class="result-footer">
+                            <button class="btn btn-primary" onclick="reviewPracticeAnswers()">
+                                <i class="fas fa-eye"></i> Xem đáp án
+                            </button>
+                            <button class="btn btn-success" onclick="restartPractice()">
+                                <i class="fas fa-redo"></i> Làm lại
+                            </button>
+                            <button class="btn btn-secondary" onclick="closePracticeResult()">
+                                <i class="fas fa-home"></i> Trang chủ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Page -->
+        <div id="exam-page" class="page">
+            <div class="container">
+                <div class="exam-setup" id="exam-setup">
+                    <h2>Cài đặt bài thi</h2>
+                    <div class="form-group">
+                        <label>Chọn chủ đề:</label>
+                        <select id="exam-topic" class="form-control">
+                            <option value="all">Tất cả chủ đề</option>
+                            <option value="installation">Cài đặt & Triển khai</option>
+                            <option value="active-directory">Active Directory</option>
+                            <option value="networking">Dịch vụ mạng</option>
+                            <option value="storage">Quản lý ổ đĩa</option>
+                            <option value="group-policy">Group Policy</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng câu hỏi:</label>
+                        <input type="number" id="exam-questions" class="form-control" value="20" min="5" max="50">
+                    </div>
+                    <div class="form-group">
+                        <label>Thời gian (phút):</label>
+                        <input type="number" id="exam-time" class="form-control" value="30" min="5" max="120">
+                    </div>
+                    <button class="btn btn-success btn-large" onclick="startExam()">
+                        <i class="fas fa-play"></i> Bắt đầu thi
+                    </button>
+                </div>
+
+                <div class="exam-container" id="exam-container" style="display: none;">
+                    <div class="exam-header">
+                        <h2>Bài thi trắc nghiệm</h2>
+                        <div class="timer" id="timer">
+                            <i class="fas fa-clock"></i>
+                            <span id="time-remaining">30:00</span>
+                        </div>
+                    </div>
+                    <div class="question-grid" id="question-grid"></div>
+                    <div class="exam-question" id="exam-question"></div>
+                    <div class="exam-footer">
+                        <button class="btn btn-danger" onclick="endExam()">
+                            <i class="fas fa-stop"></i> Kết thúc thi
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Exam Result Modal -->
+                <div id="exam-result-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="result-header">
+                            <i class="fas fa-award"></i>
+                            <h2>Kết quả thi thử</h2>
+                        </div>
+                        <div class="result-body">
+                            <div class="score-circle">
+                                <div class="score-text">
+                                    <span id="exam-score-percentage">0</span>%
+                                </div>
+                            </div>
+                            <div class="result-details">
+                                <p><strong>Số câu đúng:</strong> <span id="exam-correct-count">0</span></p>
+                                <p><strong>Số câu sai:</strong> <span id="exam-wrong-count">0</span></p>
+                                <p><strong>Tổng số câu:</strong> <span id="exam-total-count">0</span></p>
+                                <p><strong>Thời gian:</strong> <span id="exam-time-taken">--:--</span></p>
+                            </div>
+                        </div>
+                        <div class="result-footer">
+                            <button class="btn btn-primary" onclick="reviewExamAnswers()">
+                                <i class="fas fa-eye"></i> Xem đáp án
+                            </button>
+                            <button class="btn btn-success" onclick="restartExam()">
+                                <i class="fas fa-redo"></i> Thi lại
+                            </button>
+                            <button class="btn btn-secondary" onclick="closeExamResult()">
+                                <i class="fas fa-home"></i> Trang chủ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Page -->
+        <div id="statistics-page" class="page">
+            <div class="container">
+                <h2>Thống kê kết quả học tập</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-attempts">0</h3>
+                            <p>Lượt thi</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="average-score">0%</h3>
+                            <p>Điểm trung bình</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="best-score">0%</h3>
+                            <p>Điểm cao nhất</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-time">0h</h3>
+                            <p>Thời gian học</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="history-table">
+                    <h3>Lịch sử làm bài</h3>
+                    <table id="history-table">
+                        <thead>
+                            <tr>
+                                <th>Thời gian</th>
+                                <th>Chủ đề</th>
+                                <th>Số câu</th>
+                                <th>Điểm</th>
+                                <th>Kết quả</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-tbody">
+                            <tr>
+                                <td colspan="5" class="no-data">Chưa có dữ liệu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-danger" onclick="clearHistory()">
+                    <i class="fas fa-trash"></i> Xóa lịch sử
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Windows Server 2012 Quiz System. Hệ thống ôn thi trắc nghiệm.</p>
+        </div>
+    </footer>
+
+    <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
